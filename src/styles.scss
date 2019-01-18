@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/@angular/material/theming';
+
+
+@include mat-core();
+
+@import './ts-theme.scss';
+
+@import './app/app.component';
+@include angular-material-theme($ts-theme);
+
+/* You can add global styles to this file, and also import other style files */
+.fill-remaining-space {
+  // This fills the remaining space, by using flexbox.
+  // Every toolbar row uses a flexbox row layout.
+  flex: 1 1 auto;
+}
+
+.nav-tree-invisible {
+  display: none;
+}
+
+.nav-tree ul,
+.nav-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}

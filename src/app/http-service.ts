@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {GroupSchema} from './meta-data/group-schema/group-schema';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
-import {Org} from './core/org/org';
+import {MatSnackBar} from '@angular/material';
+import {HasLexicon} from './utils/HasLexicon';
 
 const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -15,11 +16,13 @@ export class HttpService {
   private serverURL = 'http://localhost:3004';
 
   constructor(
+    private message: MatSnackBar,
     private http: HttpClient,
   ) { }
 
 
-  fetchGroupSchemas(): Observable<GroupSchema[]> {
+  // -------------------- Group Schemas --------------------------------
+  fetchGroupSchemas(): Observable<any> {
     const url = `${this.serverURL}/GroupSchema/FindTrees`;
     return this.http.get(url, {headers: headers})
       .pipe(
@@ -28,12 +31,60 @@ export class HttpService {
       );
   }
 
-  fetchOrgs(): Observable<any> {
-    const url = `${this.serverURL}/org/FindTrees`;
+  updateGroupSchema(dto: GroupSchema): Observable<any> {
+    const url = `${this.serverURL}/GroupSchema`;
+    return this.http.put(url,  dto, {headers: headers})
+      .pipe(
+        tap(_ => console.log('just curious')),
+        catchError(this.handleError('Update GroupSchema failed.', []))
+      );
+  }
+
+  createGroupSchema(eo: GroupSchema): Observable<any> {
+    const url = `${this.serverURL}/GroupSchema`;
+    return this.http.post(url,  eo, {headers: headers})
+      .pipe(
+        tap(_ => console.log('just curious')),
+        catchError(this.handleError('External GroupSchema creation', []))
+      );
+  }
+
+
+  fetchVocabulary(obj: HasLexicon): Observable<any> {
+    const url = `${this.serverURL}/Vocabulary/${obj.vocabularyName}`;
+    return this.http.get(url, {headers: headers})
+      .pipe(
+        tap(_ => console.log('fetched vocabulary for ' + obj.vocabularyName)),
+        catchError(this.handleError('fetch vocabulary failed', null))
+      );
+  }
+
+  // -------------------- Generic --------------------------------
+
+  fetch(type: string): Observable<any> {
+    const url = `${this.serverURL}/${type}`;
     return this.http.get(url, {headers: headers})
       .pipe(
         tap(_ => console.log('just curious')),
-        catchError(this.handleError('fetch orgs', null))
+        catchError(this.handleError(`Fetch ${type} failed`, []))
+      );
+  }
+
+  update(type: string, dto: any): Observable<any> {
+    const url = `${this.serverURL}/${type}`;
+    return this.http.put(url,  dto, {headers: headers})
+      .pipe(
+        tap(_ => console.log('just curious')),
+        catchError(this.handleError(`Update ${type} failed`, []))
+      );
+  }
+
+  create(type: string, dto: any): Observable<any> {
+    const url = `${this.serverURL}/${type}`;
+    return this.http.post(url,  dto, {headers: headers})
+      .pipe(
+        tap(_ => console.log('just curious')),
+        catchError(this.handleError(`Create ${type} failed`, []))
       );
   }
 
@@ -55,20 +106,11 @@ export class HttpService {
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // Here's the rub - there really is no generic thing we CAN do when
-      // an http call fails.  Do we pop up an alert?  Not really a good
-      // idea always.  Remote log? Ditto. So we just put something on the console
-      // and pass back whatever we were told to.  Then for each client
-      // that makes an HTTP call and gets their error (usually empty)
-      // result back - they can decide if they need to do anything.
-      // Which is all pretty strange, because for that they could have
-      // just used the returned observable and handled the error themselves.
-      // So maybe I am not getting it, but this whole generic handler seems
-      // pretty pointless.
-      console.log('Operation: ' + operation + ' failed.');
-
+      this.message.open(`${operation}. ${error.error.error}`,
+        null, {duration: 4000});
       // Let the app keep running by returning what we were told to.
       return of(result as T);
     };
   }
+
 }

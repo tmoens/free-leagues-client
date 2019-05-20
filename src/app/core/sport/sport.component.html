@@ -1,0 +1,68 @@
+<div fxLayout="column" class="mat-elevation-z3">
+  <div *ngIf="busyEditing">
+    <app-sport-editor [obj]="selectedObj" (done)="onDoneEditing($event)"></app-sport-editor>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="30px">
+    <span class="fill-remaining-space"></span>
+    <button mat-icon-button color="primary"
+            (click)="onAdd()"
+            [disabled]="busyEditing"
+            matTooltip="Add a new External Organization">
+      <mat-icon matTooltip="foo">add</mat-icon>
+    </button>
+    <mat-form-field>
+      <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <button mat-icon-button matSuffix aria-label="clear" *ngIf="filter.value" color="primary" (click)="filter.value=''; applyFilter('');">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="tableDataSource">
+    <!-- Edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary"
+                (click)="onEdit(element)"
+                matTooltip="Add a new Sport"
+                [disabled]="busyEditing">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Description Name Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.description}}</mat-cell>
+    </ng-container>
+
+
+    <!-- Governing Body Column -->
+    <ng-container matColumnDef="governingBody">
+      <mat-header-cell *matHeaderCellDef> GoverningBody </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf="element.governingBody">
+        {{element.governingBody.name}}
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

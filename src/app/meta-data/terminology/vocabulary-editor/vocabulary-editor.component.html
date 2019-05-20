@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-header>
+    <H3>Customize terminology for {{subject}}</H3>
+  </mat-card-header>
+  <div *ngIf="busy">
+    <mat-progress-bar></mat-progress-bar>
+  </div>
+  <div *ngIf="!busy">
+    <div *ngFor="let t of vocabulary.terms">
+      <div fxLayout="row" fxLayoutGap="25px">
+        <p style="width: 400px">{{t.description}}</p>
+        <mat-form-field style="width: 150px" disabled>
+          <input matInput placeholder="Default value" disabled [value]="t.parentValue">
+        </mat-form-field>
+        <mat-form-field style="width: 150px">
+          <input matInput placeholder="Optional override"
+                 [(ngModel)]="lexicon[t.id]"
+                 (change)="onLexiconChange(t)">
+        </mat-form-field>
+        <mat-form-field style="width: 150px">
+          <input matInput placeholder="Effective value" disabled [value]="t.effectiveValue">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <mat-card-content fxLayout="column">
+  </mat-card-content>
+</mat-card>

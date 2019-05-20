@@ -1,23 +1,34 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <script src="app.component.ts"></script>
-<mat-toolbar>
-  <button mat-icon-button (click)="sideMenu.toggle()" color="primary">
-    <mat-icon>menu</mat-icon>
-    <span class="mat-h2">{{title}}</span>
-  </button>
+<div class="mat-typography">
 
-</mat-toolbar>
-<mat-sidenav-container>
-  <mat-sidenav #sideMenu mode="over">
-    <p><a mat-button routerLink="/groupSchemaEditor" routerLinkActive="active" >
-      Group Schema Editor
-    </a></p>
-    <p><a mat-button routerLink="/orgEditor" routerLinkActive="active" >
-      Organization Editor
-    </a></p>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <p>hmmm</p>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <mat-toolbar>
+    <button mat-icon-button (click)="sideMenu.toggle()" color="primary">
+      <mat-icon>menu</mat-icon>
+      <span class="mat-h2">{{title}} - {{appState.activeTool$ | async}}</span>
+    </button>
+
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav #sideMenu mode="over">
+      <p>
+        <a mat-button routerLink="/externalOrgEditor" routerLinkActive="active" >
+          External Organization Editor
+        </a>
+      </p>
+      <p>
+        <a mat-button routerLink="/orgAdmin" routerLinkActive="active" >
+          Organization Editor
+        </a>
+      </p>
+      <p>
+        <a mat-button routerLink="/sportAdmin" routerLinkActive="active" >
+          Sport Editor
+        </a>
+      </p>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

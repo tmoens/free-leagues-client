@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-header>
+    <H3 *ngIf="obj.id">Update data for {{obj.name}}</H3>
+    <H3 *ngIf="!obj.id">Create a new external organization</H3>
+  </mat-card-header>
+  <mat-card-content fxLayout="column">
+    <mat-form-field style="width: 250px">
+      <input matInput placeholder="Organization Name"
+             [(ngModel)]="obj.name">
+    </mat-form-field>
+    <mat-form-field style="width: 100px">
+      <input matInput placeholder="Abbreviation"
+             [(ngModel)]="obj.nameShort">
+    </mat-form-field>
+    <mat-form-field style="width: 250px">
+      <input matInput placeholder="Web Site"
+             [(ngModel)]="obj.url">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button aria-label="cancel" color="primary" (click)="onCancel()">
+      Cancel
+    </button>
+    <button *ngIf="obj.id" mat-button aria-label="update" color="primary" (click)="onUpdate()">
+      Update
+    </button>
+    <button *ngIf="!obj.id" mat-button aria-label="save" color="primary" (click)="onSave()">
+      Save
+    </button>
+  </mat-card-actions>
+</mat-card>

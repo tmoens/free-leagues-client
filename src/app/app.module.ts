@@ -19,11 +19,14 @@ import { ExternalOrgEditorComponent } from './core/external-data/external-org/ex
 import { ExternalOrgComponent } from './core/external-data/external-org/external-org.component';
 import { OrgComponent } from './core/org/org.component';
 import { OrgEditorComponent } from './core/org/org-editor/org-editor.component';
+import { PersonEditorComponent } from './core/person/person-editor/person-editor.component';
 import { TLComponent } from './core/tl/tl.component';
 import { SportComponent } from './core/sport/sport.component';
 import { SportEditorComponent } from './core/sport/sport-editor/sport-editor.component';
 import { TerminologyService } from './terminology.service';
 import { VocabularyEditorComponent } from './meta-data/terminology/vocabulary-editor/vocabulary-editor.component';
+import { TlEditorComponent } from './core/tl/tl-editor/tl-editor.component';
+import { NewTlComponent } from './core/tl/new-tl/new-tl.component';
 
 @NgModule({
   declarations: [
@@ -33,10 +36,14 @@ import { VocabularyEditorComponent } from './meta-data/terminology/vocabulary-ed
     GroupSchemaComponent,
     OrgComponent,
     OrgEditorComponent,
+    PersonEditorComponent,
     TLComponent,
     SportComponent,
     SportEditorComponent,
     VocabularyEditorComponent,
+    PersonEditorComponent,
+    TlEditorComponent,
+    NewTlComponent,
   ],
   imports: [
     AppRoutingModule,

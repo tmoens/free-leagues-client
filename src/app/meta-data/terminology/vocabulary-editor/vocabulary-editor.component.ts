@@ -40,8 +40,6 @@ export class VocabularyEditorComponent {
         this.vocabulary = plainToClass(Vocabulary, data);
         this.refreshVocabulary();
         this.busy = false;
-        console.log(this.vocabulary);
-
       });
   }
 

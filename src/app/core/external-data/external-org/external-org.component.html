@@ -23,7 +23,7 @@
 
 
   <!-- filterable list of all known external organizations -->
-  <mat-table #table [dataSource]="tableDataSource">
+  <mat-table *ngIf="!busyEditing" #table [dataSource]="tableDataSource">
 
     <!-- Edit Column -->
     <ng-container matColumnDef="edit">
@@ -31,8 +31,7 @@
       <mat-cell *matCellDef="let element">
         <button mat-icon-button color="primary"
                 (click)="onEdit(element)"
-                matTooltip="Add a new External Organization"
-                [disabled]="busyEditing">
+                matTooltip="Add a new External Organization">
           <mat-icon>edit</mat-icon>
         </button>
       </mat-cell>

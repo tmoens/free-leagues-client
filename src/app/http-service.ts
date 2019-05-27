@@ -26,7 +26,7 @@ export class HttpService {
     const url = `${this.serverURL}/GroupSchema/FindTrees`;
     return this.http.get(url, {headers: headers})
       .pipe(
-        tap(_ => console.log('just curious')),
+        tap(_ => console.log('just curious6')),
         catchError(this.handleError('fetch group schemas', null))
       );
   }
@@ -35,7 +35,7 @@ export class HttpService {
     const url = `${this.serverURL}/GroupSchema`;
     return this.http.put(url,  dto, {headers: headers})
       .pipe(
-        tap(_ => console.log('just curious')),
+        tap(_ => console.log('just curious5')),
         catchError(this.handleError('Update GroupSchema failed.', []))
       );
   }
@@ -44,7 +44,7 @@ export class HttpService {
     const url = `${this.serverURL}/GroupSchema`;
     return this.http.post(url,  eo, {headers: headers})
       .pipe(
-        tap(_ => console.log('just curious')),
+        tap(_ => console.log('just curious4')),
         catchError(this.handleError('External GroupSchema creation', []))
       );
   }
@@ -65,7 +65,7 @@ export class HttpService {
     const url = `${this.serverURL}/${type}`;
     return this.http.get(url, {headers: headers})
       .pipe(
-        tap(_ => console.log('just curious')),
+        tap(_ => console.log('fetching ' + type)),
         catchError(this.handleError(`Fetch ${type} failed`, []))
       );
   }
@@ -74,7 +74,7 @@ export class HttpService {
     const url = `${this.serverURL}/${type}`;
     return this.http.put(url,  dto, {headers: headers})
       .pipe(
-        tap(_ => console.log('just curious')),
+        tap(_ => console.log('just curious2')),
         catchError(this.handleError(`Update ${type} failed`, []))
       );
   }
@@ -83,7 +83,7 @@ export class HttpService {
     const url = `${this.serverURL}/${type}`;
     return this.http.post(url,  dto, {headers: headers})
       .pipe(
-        tap(_ => console.log('just curious')),
+        tap(_ => console.log('just curious3')),
         catchError(this.handleError(`Create ${type} failed`, []))
       );
   }

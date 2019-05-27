@@ -10,7 +10,6 @@ export class Sport  extends HasLexicon {
 
   constructor() {
     super();
-
   }
 
   getVocabularyName() {

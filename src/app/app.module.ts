@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { GroupSchemaComponent } from './meta-data/group-schema/group-schema.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatButtonModule, MatCardModule, MatDatepickerModule, MatDialogModule,
@@ -27,6 +27,7 @@ import { TerminologyService } from './terminology.service';
 import { VocabularyEditorComponent } from './meta-data/terminology/vocabulary-editor/vocabulary-editor.component';
 import { TlEditorComponent } from './core/tl/tl-editor/tl-editor.component';
 import { NewTlComponent } from './core/tl/new-tl/new-tl.component';
+import {MomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NewTlComponent } from './core/tl/new-tl/new-tl.component';
     FlexLayoutModule,
     FormsModule,
     HttpClientModule,
+    MomentDateModule,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,

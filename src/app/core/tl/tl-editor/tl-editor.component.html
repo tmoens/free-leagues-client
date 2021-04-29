@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
-    <H3 *ngIf="objCopy.id">Update data for {{objCopy.name}}</H3>
-    <H3 *ngIf="!objCopy.id">Create a new Tournament or League</H3>
+    <H3 *ngIf="objCopy && objCopy.id">Update data for {{objCopy.name}}</H3>
+    <H3 *ngIf="objCopy && !objCopy.id">Create a new Tournament or League</H3>
   </mat-card-header>
   <mat-card-content fxLayout="column">
     <mat-form-field style="width: 250px">
@@ -11,6 +11,30 @@
     <mat-form-field>
       <input matInput placeholder="Abbrv"
              [(ngModel)]="objCopy.nameShort">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Description"
+             [(ngModel)]="objCopy.description">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="startDateDP" placeholder="Start Date"
+             [formControl]="startDateFC">
+      <mat-datepicker-toggle matSuffix [for]="startDateDP"></mat-datepicker-toggle>
+      <mat-datepicker #startDateDP></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="endDateDP" placeholder="End Date"
+             [formControl]="endDateFC">
+      <mat-datepicker-toggle matSuffix [for]="endDateDP"></mat-datepicker-toggle>
+      <mat-datepicker #endDateDP></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select name="sportSelector"
+                  placeholder="Sport"
+                  [(value)]="selectedSport"
+                  (selectionChange)="onSportChange()">
+        <mat-option *ngFor="let s of allSports" [value]="s">{{s.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions>

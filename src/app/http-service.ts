@@ -70,6 +70,15 @@ export class HttpService {
       );
   }
 
+  fetchInstance(type: string, id): Observable<any> {
+    const url = `${this.serverURL}/${type}/${id}`;
+    return this.http.get(url, {headers: headers})
+      .pipe(
+        tap(_ => console.log(`fetching ${type}/${id}`)),
+        catchError(this.handleError(`Fetch ${type}/${id} failed`, []))
+      );
+  }
+
   update(type: string, dto: any): Observable<any> {
     const url = `${this.serverURL}/${type}`;
     return this.http.put(url,  dto, {headers: headers})
